@@ -4,6 +4,7 @@ VueCronEditor is a component library built with Vue and Bootstrap-Vue allowing f
 Inspired by https://github.com/karoletrych/vue-cron-editor
 
 # Demo
+[vue-cron-editor-bootstrap.vercel.app](https://vue-cron-editor-bootstrap.vercel.app/)
 
 # Requirements
 
