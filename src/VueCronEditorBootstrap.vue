@@ -1,204 +1,151 @@
 <template>
-    <b-tabs v-model="activeTab" @input="reset" content-class="mt-3 mb-3">
-        <b-tab :value="0" :title="_$t('minutes')" class="minutes-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{ _$t("every") }}</label>
-                    <b-form-input
-                        type="number"
-                        v-model="editorData.minuteInterval"
-                        v-bind:style="{ width: '80px' }"
-                    />
-                    <label class="me-2 ms-2">{{ _$t("mminutes") }}</label>
-                </div>
-            </div>
-        </b-tab>
-        <b-tab :value="1" :title="_$t('hourly')" class="hourly-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{ _$t("every") }}</label>
-                    <b-form-input
-                        type="number"
-                        v-model="editorData.hourInterval"
-                        v-bind:style="{ width: '80px' }"
-                    />
-                    <label class="me-2 ms-2">{{
-                        _$t("hoursOnMinute")
-                    }}</label>
-                    <b-form-input
-                        type="number"
-                        max="59"
-                        min="0"
-                        v-model="editorData.minutes"
-                        v-bind:style="{ width: '80px' }"
-                    />
-                </div>
-            </div>
-        </b-tab>
-        <b-tab :value="2" :title="_$t('daily')" class="daily-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{ _$t("every") }}</label>
-                    <b-form-input
-                        type="number"
-                        v-model="editorData.dayInterval"
-                        v-bind:style="{ width: '80px' }"
-                    />
-                    <label class="me-2 ms-2">{{
-                        _$t("daysAt")
-                    }}</label>
-                    <b-form-timepicker
-                        :value="dateTime"
-                        :hour12="false"
-                        @input="setDateTime"
-                        style="width: auto; display: flex;"
-                    />
-                </div>
-            </div>
-        </b-tab>
-        <b-tab :value="3" :title="_$t('weekly')" class="weekly-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{ _$t("every") }}</label>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-0`" type="checkbox" class="form-check-input" value="0" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-0`">{{ _$t("sun") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-1`" type="checkbox" class="form-check-input" value="1" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-1`">{{ _$t("mon") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-2`" type="checkbox" class="form-check-input" value="2" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-2`">{{ _$t("tue") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-3`" type="checkbox" class="form-check-input" value="3" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-3`">{{ _$t("wed") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-4`" type="checkbox" class="form-check-input" value="4" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-4`">{{ _$t("thu") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-5`" type="checkbox" class="form-check-input" value="5" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-5`">{{ _$t("fri") }}</label>
-                    </div>
-                    <div class="form-check form-switch me-2">
-                        <input :id="`toggle-editor-6`" type="checkbox" class="form-check-input" value="6" v-model="editorData.days">
-                        <label class="form-check-label" :for="`toggle-editor-6`">{{ _$t("sat") }}</label>
-                    </div>
-                    <label class="me-2">{{ _$t("at") }}</label>
-                    <b-form-timepicker
-                        :value="dateTime"
-                        @input="setDateTime"
-                        :hour12="false"
-                        style="width: auto; display: flex;"
-                    />
-                </div>
-            </div>
-        </b-tab>
-        <b-tab :value="4" :title="_$t('monthly')" class="monthly-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{ _$t("onThe") }}</label>
-                    <b-form-input
-                        type="number"
-                        v-model="editorData.day"
-                        v-bind:style="{ width: '80px' }"
-                    />
-                    <label class="me-2 ms-2">{{
-                        _$t("dayOfEvery")
-                    }}</label>
-                    <b-form-input
-                        type="number"
-                        v-model="editorData.monthInterval"
-                        v-bind:style="{ width: '80px' }"
-                    /><label class="me-2 ms-2">{{
-                        _$t("monthsAt")
-                    }}</label>
-                    <b-form-timepicker
-                        :value="dateTime"
-                        @input="setDateTime"
-                        :hour12="false"
-                        style="width: auto; display: flex;"
-                    />
-                </div>
-            </div>
-        </b-tab>
-        <b-tab :value="4" :title="_$t('advanced')" class="advanced-tab">
-            <div class="row">
-                <div class="col d-flex" style="align-items: center;">
-                    <label class="me-2">{{
-                        _$t("cronExpression")
-                    }}</label>
-                    <b-form-input v-model="editorData.cronExpression" style="width:auto"/>
-                    <label class="me-2 ms-2">
-                        {{ explanation }}
-                    </label>
-                </div>
-            </div>
-        </b-tab>
-    </b-tabs>
+  <b-tabs v-model="activeTabIndex" content-class="p-2" @input="reset">
+    <b-tab :value="0" :title="translate('minutes')" class="minutes-tab">
+      <b-row>
+        <b-col class="d-flex align-items-center">
+          <span class="mr-2">{{ translate('every') }}</span>
+          <b-form-input
+            v-model="editorData.minuteInterval"
+            type="number"
+            min="1"
+            max="59"
+            class="mr-2"
+            style="width: 80px"
+          />
+          <span>{{ translate('mminutes') }}</span>
+        </b-col>
+      </b-row>
+    </b-tab>
+    <b-tab :value="1" :title="translate('hourly')" class="hourly-tab">
+      <b-row>
+        <b-col class="d-flex align-items-center">
+          <span class="mr-2">{{ translate('every') }}</span>
+          <b-form-input
+            v-model="editorData.hourInterval"
+            type="number"
+            min="1"
+            max="24"
+            class="mr-2"
+            style="width: 80px"
+          />
+          <span class="mr-2">{{ translate('hoursOnMinute') }}</span>
+          <b-form-input v-model="editorData.minutes" type="number" min="0" max="59" style="width: 80px" />
+        </b-col>
+      </b-row>
+    </b-tab>
+    <b-tab :value="2" :title="translate('daily')" class="daily-tab">
+      <b-row>
+        <b-col class="d-flex align-items-center">
+          <span class="mr-2">{{ translate('every') }}</span>
+          <b-form-input v-model="editorData.dayInterval" type="number" class="mr-2" style="width: 80px" />
+          <span class="mr-2">{{ translate('daysAt') }}</span>
+          <b-form-timepicker :value="dateTime" :hour12="false" style="width: auto" @input="setDateTime" />
+        </b-col>
+      </b-row>
+    </b-tab>
+    <b-tab :value="3" :title="translate('weekly')" class="weekly-tab">
+      <b-row>
+        <b-col class="d-flex align-items-center">
+          <span class="mr-2">{{ translate('every') }}</span>
+          <b-form-checkbox v-model="editorData.days" value="0" class="mr-2">{{ translate('sun') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="1" class="mr-2">{{ translate('mon') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="2" class="mr-2">{{ translate('tue') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="3" class="mr-2">{{ translate('wed') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="4" class="mr-2">{{ translate('thu') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="5" class="mr-2">{{ translate('fri') }}</b-form-checkbox>
+          <b-form-checkbox v-model="editorData.days" value="6" class="mr-2">{{ translate('sat') }}</b-form-checkbox>
+          <span class="mr-2">{{ translate('at') }}</span>
+          <b-form-timepicker :value="dateTime" :hour12="false" style="width: auto" @input="setDateTime" />
+        </b-col>
+      </b-row>
+    </b-tab>
+    <b-tab :value="4" :title="translate('monthly')" class="monthly-tab">
+      <b-row>
+        <b-col class="d-flex align-items-center">
+          <span class="mr-2">{{ translate('onThe') }}</span>
+          <b-form-input v-model="editorData.day" type="number" class="mr-2" style="width: 80px" />
+          <span class="mr-2">{{ translate('dayOfEvery') }}</span>
+          <b-form-input v-model="editorData.monthInterval" type="number" class="mr-2" style="width: 80px" />
+          <span class="mr-2">{{ translate('monthsAt') }}</span>
+          <b-form-timepicker :value="dateTime" :hour12="false" style="width: auto" @input="setDateTime" />
+        </b-col>
+      </b-row>
+    </b-tab>
+    <b-tab :value="5" :title="translate('advanced')" class="advanced-tab">
+      <b-row>
+        <b-col class="d-flex" style="align-items: center">
+          <span class="mr-2">{{ translate('cronExpression') }}</span>
+          <b-form-input v-model="editorData.cronExpression" class="mr-2" style="width: auto" />
+          <span>{{ explanation }}</span>
+        </b-col>
+      </b-row>
+    </b-tab>
+  </b-tabs>
 </template>
 
 <script>
-import vueCronEditorMixin from "./core/vueCronEditorMixin";
-import {
-    BTabs,
-    BTab,
-    BFormInput,
-    BFormTimepicker,
-} from "bootstrap-vue";
+import vueCronEditorMixin from './core/vueCronEditorMixin'
+import { BTabs, BTab, BRow, BCol, BFormCheckbox, BFormInput, BFormTimepicker } from 'bootstrap-vue'
 
 export default {
-    name: "VueCronEditorBootstrap",
-    mixins: [vueCronEditorMixin],
-    components: {
-        BFormInput,
-        BTabs,
-        BTab,
-        BFormTimepicker
-    },
-    data: () => ({
-        activeTab: null,
-        tabs: [
-            { id: 0, key: "minutes" },
-            { id: 1, key: "hourly" },
-            { id: 2, key: "daily" },
-            { id: 3, key: "weekly" },
-            { id: 4, key: "monthly" },
-            { id: 5, key: "advanced" }
-        ]
-    }),
-    mounted() {
-        this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
-    },
-    watch: {
-        currentTab() {
-            this.activeTab = this.tabs.find(t => t.key === this.currentTab).id;
-        }
-    },
-    computed: {
-        dateTime() {
-            let dateTime = `${this.editorData.hours}:${this.editorData.minutes}:00`;
-            return dateTime;
-        }
-    },
-    methods: {
-        reset(e) {
-            const tabKey = this.tabs.find(t => t.id === e).key;
-            this._resetToTab(tabKey);
-        },
-        setDateTime(e) {
-            if (e == null) {
-                return;
-            }
-            const splittedTime = e.split(":");
+  name: 'VueCronEditorBootstrap',
 
-            this.editorData.hours = splittedTime[0];
-            this.editorData.minutes = splittedTime[1];
-        }
-    }
-};
+  components: {
+    BTabs,
+    BTab,
+    BRow,
+    BCol,
+    BFormCheckbox,
+    BFormInput,
+    BFormTimepicker,
+  },
+
+  mixins: [vueCronEditorMixin],
+
+  data: () => ({
+    activeTabIndex: null,
+    tabs: [
+      { idx: 0, key: 'minutes' },
+      { idx: 1, key: 'hourly' },
+      { idx: 2, key: 'daily' },
+      { idx: 3, key: 'weekly' },
+      { idx: 4, key: 'monthly' },
+      { idx: 5, key: 'advanced' },
+    ],
+  }),
+
+  computed: {
+    dateTime() {
+      return `${this.editorData.hours}:${this.editorData.minutes}:00`
+    },
+  },
+
+  watch: {
+    currentTab() {
+      this.activeTabIndex = this.tabs.find(t => t.key === this.currentTab).idx
+    },
+  },
+
+  created() {
+    this.activeTabIndex = this.tabs.find(t => t.key === this.currentTab).idx
+  },
+
+  methods: {
+    reset(tabIndex) {
+      const tab = this.tabs.find(t => t.idx === tabIndex)
+      if (tab) {
+        this.resetToTab(tab.key)
+      }
+    },
+
+    setDateTime(time) {
+      if (time == null) {
+        return
+      }
+      const splittedTime = time.split(':')
+      this.editorData.hours = splittedTime[0]
+      this.editorData.minutes = splittedTime[1]
+    },
+  },
+}
 </script>
