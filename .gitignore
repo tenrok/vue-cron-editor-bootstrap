@@ -22,4 +22,5 @@ yarn-error.log*
 node_modules
 
 # Output directories
+/demo
 /dist

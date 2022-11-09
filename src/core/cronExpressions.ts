@@ -60,13 +60,17 @@ export const buildExpression = (event: TabUpdatedEvent): string => {
   }
 
   if (event.type === 'weekly') {
-    return (
-      `${event.minutes} ${event.hours} * * ` +
-      `${event.days
-        .filter(d => d)
-        .sort()
-        .join()}`
-    )
+    if ([0, 7].includes(event.days.length)) {
+      return `${event.minutes} ${event.hours} * * *`
+    } else {
+      return (
+        `${event.minutes} ${event.hours} * * ` +
+        `${event.days
+          .filter(d => d)
+          .sort()
+          .join()}`
+      )
+    }
   }
 
   if (event.type === 'monthly') {
@@ -86,14 +90,14 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
   if (expression!.split(' ').length != 5) {
     return {
       type: 'advanced',
-      cronExpression: expression
+      cronExpression: expression,
     }
   }
 
   if ((groups = expression.match(/^\*\/(\d+) \* \* \* \*$/))) {
     return {
       type: 'minutes',
-      minuteInterval: Number(groups[1])
+      minuteInterval: Number(groups[1]),
     }
   }
 
@@ -101,7 +105,7 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
     return {
       type: 'hourly',
       minutes: Number(groups[1]),
-      hourInterval: Number(groups[2])
+      hourInterval: Number(groups[2]),
     }
   }
 
@@ -110,7 +114,7 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
       type: 'daily',
       minutes: Number(groups[1]),
       hours: Number(groups[2]),
-      dayInterval: Number(groups[3])
+      dayInterval: Number(groups[3]),
     }
   }
 
@@ -126,7 +130,7 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
           .slice(optionalDaysBeginIndex, matchesEndIndex)
           .map(d => d && d.replace(/,/, ''))
           .filter(d => d)
-      )
+      ),
     }
   }
 
@@ -136,12 +140,12 @@ export const parseExpression = (expression: string): TabUpdatedEvent => {
       minutes: Number(groups[1]),
       hours: Number(groups[2]),
       day: Number(groups[3]),
-      monthInterval: Number(groups[4])
+      monthInterval: Number(groups[4]),
     }
   }
 
   return {
     type: 'advanced',
-    cronExpression: expression
+    cronExpression: expression,
   }
 }

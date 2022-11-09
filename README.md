@@ -1,5 +1,3 @@
-[![Actions Status](https://github.com/karoletrych/vue-cron-editor/workflows/Node%20CI/badge.svg)](https://github.com/karoletrych/vue-cron-editor/actions)
-
 # vue-cron-editor-bootstrap
 
 VueCronEditor is a component library built with Vue and Bootstrap-Vue allowing for easier editing of cron expressions.
@@ -9,36 +7,38 @@ Inspired by https://github.com/karoletrych/vue-cron-editor
 
 # Requirements
 
--   Vue ^2.0
--   Bootstrap-Vue ^2.14.0
+- Vue ^2.0
+- Bootstrap-Vue ^2.14.0
 
 # Installation
 
--   vue-cron-editor-bootstrap
+- vue-cron-editor-bootstrap
 
 ```
-npm install vue-cron-editor-bootstrap --save
+npm install @tenrok/vue-cron-editor-bootstrap --save
 ```
 
 # Usage
 
 ```
 <template>
-  <VueCronEditorBootstrap v-model="cronExpression"/>
+  <VueCronEditorBootstrap v-model="cronExpression" />
   {{cronExpression}}
 </template>
 
 <script>
-import VueCronEditorBootstrap from 'vue-cron-editor-bootstrap';
+import VueCronEditorBootstrap from '@tenrok/vue-cron-editor-bootstrap';
 
 export default {
   name: 'App',
   components: {
     VueCronEditorBootstrap
   },
-  data: () => ({
+  data() {
+    return {
       cronExpression: "*/1 * * * *"
-  }),
+    }
+  },
 };
 </script>
 ```
@@ -57,13 +57,13 @@ The language of the component can be selected with the `locale` prop.
 <VueCronEditorBootstrap
     v-model="expression"
     locale="pl"
-></VueCronEditorBootstrap>
+/>
 ```
 
 Currently supported languages:
 
--   en
--   pl
+- en
+- pl
 
 Custom locales can be provided via a `customLocales` prop:
 
@@ -81,7 +81,6 @@ Custom locales can be provided via a `customLocales` prop:
         onThe: "On the",
         dayOfEvery: "day, of every",
         monthsAt: "month(s), at",
-        everyDay: "Every",
         mon: "Mon",
         tue: "Tue",
         wed: "Wed",
@@ -89,18 +88,17 @@ Custom locales can be provided via a `customLocales` prop:
         fri: "Fri",
         sat: "Sat",
         sun: "Sun",
-        hasToBeBetween: "Has to be between",
-        and: "and",
         minutes: "MINUTES",
         hourly: "HOURLY",
         daily: "DAILY",
         weekly: "WEEKLY",
         monthly: "MONTHLY",
         advanced: "ADVANCED",
-        cronExpression: "cron expression:"
+        cronExpression: "cron expression:",
+        onlyOn: "Only on"
     }
 }"
-></VueCronEditorBootstrap>
+/>
 ```
 
 # Contributing

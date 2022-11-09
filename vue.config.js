@@ -1,4 +1,7 @@
+const isBuildLib = (process.env.npm_lifecycle_script || '').indexOf('--target lib') > 0
+
 module.exports = {
-  publicPath: '/vue-cron-editor-bootstrap',
+  publicPath: '',
+  outputDir: isBuildLib ? 'dist' : 'demo',
   css: { extract: false },
-};
+}
