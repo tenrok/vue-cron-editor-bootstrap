@@ -1,19 +1,21 @@
 # vue-cron-editor-bootstrap
 
+[![Version](https://img.shields.io/npm/v/@tenrok/vue-cron-editor-bootstrap.svg)](https://www.npmjs.com/package/@tenrok/vue-cron-editor-bootstrap)
+[![License](https://img.shields.io/npm/l/@tenrok/vue-cron-editor-bootstrap.svg)](https://github.com/tenrok/vue-cron-editor-bootstrap/blob/main/LICENSE)
+[![Vue.js](https://img.shields.io/badge/vue-2.7.14-brightgreen.svg?logo=vue.js)](https://github.com/vuejs/vue)
+[![GitHub last commit](https://img.shields.io/github/last-commit/tenrok/vue-cron-editor-bootstrap.svg)](https://github.com/tenrok/vue-cron-editor-bootstrap)
+[![Downloads](https://img.shields.io/npm/dm/@tenrok/vue-cron-editor-bootstrap.svg)](https://npmcharts.com/compare/@tenrok/vue-cron-editor-bootstrap?minimal=true)
+[![Demo](https://img.shields.io/badge/demo-demo-blue.svg)](https://tenrok.github.io/vue-cron-editor-bootstrap/)
+
 VueCronEditor is a component library built with Vue and Bootstrap-Vue allowing for easier editing of cron expressions.
 Inspired by https://github.com/karoletrych/vue-cron-editor
-
-# Demo
-[vue-cron-editor-bootstrap.vercel.app](https://vue-cron-editor-bootstrap.vercel.app/)
 
 # Requirements
 
 - Vue ^2.0
-- Bootstrap-Vue ^2.14.0
+- @tenrok/bootstrap-vue ^2.23.2
 
 # Installation
-
-- vue-cron-editor-bootstrap
 
 ```
 npm install @tenrok/vue-cron-editor-bootstrap --save
