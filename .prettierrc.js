@@ -1,9 +1,12 @@
 // https://prettier.io/docs/en/options.html
 
-module.exports = {
-	arrowParens: 'avoid',
-	printWidth: 140,
-	semi: false,
-	singleQuote: true,
-	useTabs: true,
+/** @type {import("prettier").Config} */
+const config = {
+  arrowParens: 'avoid',
+  printWidth: 180,
+  semi: false,
+  singleQuote: true,
+  vueIndentScriptAndStyle: true,
 }
+
+module.exports = config

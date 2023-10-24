@@ -1,18 +1,15 @@
-import _Vue from 'vue'
-import VueCronEditorBootstrap from './components/VueCronEditorBootstrap.vue'
+import { VueConstructor, PluginObject } from 'vue'
+import VueCronEditor from './components/VueCronEditor.vue'
 
-const components = [VueCronEditorBootstrap]
+const components: { [key: string]: VueConstructor } = { VueCronEditor }
 
-class CronEditorPluginOptions {}
-
-type CronEditorPlugin = {
-	install(vue: typeof _Vue, options?: CronEditorPluginOptions): void
+const VueCronEditorPlugin: PluginObject<any> = {
+  install(Vue) {
+    for (const key in components) {
+      Vue.component(key, components[key])
+    }
+  },
 }
 
-const instance: CronEditorPlugin = {
-	install(vue) {
-		components.forEach(component => vue.component(component.name, component))
-	},
-}
-
-export default instance
+export default VueCronEditor
+export { VueCronEditor, VueCronEditorPlugin }

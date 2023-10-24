@@ -25,17 +25,17 @@ npm install @tenrok/vue-cron-editor-bootstrap --save
 
 ```
 <template>
-  <VueCronEditorBootstrap v-model="cronExpression" />
+  <VueCronEditor v-model="cronExpression" />
   {{cronExpression}}
 </template>
 
 <script>
-import VueCronEditorBootstrap from '@tenrok/vue-cron-editor-bootstrap';
+import VueCronEditor from '@tenrok/vue-cron-editor-bootstrap';
 
 export default {
   name: 'App',
   components: {
-    VueCronEditorBootstrap
+    VueCronEditor
   },
   data() {
     return {
@@ -57,7 +57,7 @@ To preserve expression on switch to **advanced** tab set the `preserveStateOnSwi
 The language of the component can be selected with the `locale` prop.
 
 ```
-<VueCronEditorBootstrap
+<VueCronEditor
     v-model="expression"
     locale="pl"
 />
@@ -71,7 +71,7 @@ Currently supported languages:
 Custom locales can be provided via a `customLocales` prop:
 
 ```
-<VueCronEditorBootstrap
+<VueCronEditor
     v-model="expression"
     locale="test"
     :custom-locales="{

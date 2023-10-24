@@ -1,9 +1,20 @@
 {
-	"editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
-	"editor.fontLigatures": true,
-	"editor.fontWeight": "400",
-	"editor.foldingStrategy": "indentation",
-	"editor.formatOnSave": true,
-	"editor.rulers": [140],
-	"editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.fontFamily": "'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "400",
+  "editor.foldingStrategy": "indentation",
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    180
+  ],
+  "editor.defaultFormatter": "octref.vetur",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
