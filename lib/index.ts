@@ -3,7 +3,7 @@ import VueCronEditor from './components/VueCronEditor.vue'
 
 const components: { [key: string]: VueConstructor } = { VueCronEditor }
 
-const VueCronEditorPlugin: PluginObject<any> = {
+const Plugin: PluginObject<any> = {
   install(Vue) {
     for (const key in components) {
       Vue.component(key, components[key])
@@ -12,4 +12,4 @@ const VueCronEditorPlugin: PluginObject<any> = {
 }
 
 export default VueCronEditor
-export { VueCronEditor, VueCronEditorPlugin }
+export { VueCronEditor, Plugin }

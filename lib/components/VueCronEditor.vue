@@ -34,17 +34,9 @@
         <div class="col d-flex align-items-center">
           <span class="mr-3">{{ translate('onlyOn') }}</span>
 
-          <!-- <b-form-checkbox v-model="editorData.days" value="0" class="mr-3">{{ translate('sun') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="1" class="mr-3">{{ translate('mon') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="2" class="mr-3">{{ translate('tue') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="3" class="mr-3">{{ translate('wed') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="4" class="mr-3">{{ translate('thu') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="5" class="mr-3">{{ translate('fri') }}</b-form-checkbox> -->
-          <!-- <b-form-checkbox v-model="editorData.days" value="6" class="mr-3">{{ translate('sat') }}</b-form-checkbox> -->
-
-          <div v-for="(a, idx) in uids" :key="`${a[0]}`" class="mr-3 custom-control custom-checkbox">
-            <input :id="`${a[1]}`" v-model="editorData.days" type="checkbox" class="custom-control-input" :value="`${idx}`" />
-            <label class="custom-control-label" :for="`${a[1]}`">{{ translate(a[0]) }}</label>
+          <div v-for="(ch, idx) in checkboxes" :key="`${ch.day}`" class="mr-3 custom-control custom-checkbox">
+            <input :id="`${ch.id}`" v-model="editorData.days" type="checkbox" class="custom-control-input" :value="`${idx}`" />
+            <label class="custom-control-label" :for="`${ch.id}`">{{ translate(ch.day) }}</label>
           </div>
 
           <span class="mr-1">{{ translate('at') }}</span>
@@ -78,18 +70,13 @@
 
 <script lang="ts">
   import VueCronEditorMixin from '../core/vueCronEditorMixin'
-  import { BTabs, BTab, BFormInput, BFormTimepicker } from '@tenrok/bootstrap-vue'
+  import { BTabs, BTab, BFormInput, BFormTimepicker } from 'bootstrap-vue'
   import { TabKey } from 'lib/core/cronExpressions'
-
-  interface Tab {
-    idx: number
-    key: string
-  }
 
   interface Data {
     activeTabIndex?: number
-    tabs: Tab[]
-    uids: string[][]
+    tabs: { idx: number; key: string }[]
+    checkboxes: { day: string; id: string }[]
   }
 
   export default VueCronEditorMixin.extend({
@@ -111,7 +98,7 @@
           { idx: 4, key: 'monthly' },
           { idx: 5, key: 'advanced' },
         ],
-        uids: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].map(x => [x, crypto.randomUUID()]),
+        checkboxes: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].map(day => ({ day, id: crypto.randomUUID() })),
       }
     },
 

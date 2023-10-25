@@ -11,9 +11,9 @@ module.exports = {
   chainWebpack: config => {
     if (isProduction) {
       config.externals({
-        '@tenrok/bootstrap-vue': '@tenrok/bootstrap-vue',
+        vue: 'vue',
+        'bootstrap-vue': 'bootstrap-vue',
       })
-      // config.merge({ devtool: 'source-map' })
     }
   },
 }
